@@ -13,32 +13,38 @@ post '/submit' do
 
   @html = "<table border=\"1\">"
 
+  @start = Integer(params[:start])
+  @end   = Integer(params[:end])
+  count = 1
+
   Anemone.crawl(@submitvalue) do |anemone|
     anemone.on_every_page do |crawl_page|
-      @html = @html + "<tr>"
-
       puts "crawl_page: #{crawl_page.url}"
+      if (count <= @end && count >= @start)
+        puts "in"
+        count = count+1
+        @html = @html + "<tr>"
 
-      result = nil
+        result = nil
 
-      #remove script
-      body = crawl_page.doc
-      if ( !body.nil? )
-        body.search('//script').each do |node|
-          node.remove
+        #remove script
+        body = crawl_page.doc
+        if ( !body.nil? )
+          body.search('//script').each do |node|
+            node.remove
+          end
+          result = string_contains_words(body.text, @common_english_words)
         end
-        result = string_contains_words(body.text, @common_english_words)
+
+        if result.nil?
+          @html = @html + "<td>OK</td>"
+        else
+          @html = @html + "<td>NOT OK found '" + result.to_s  + "'</td>"
+        end
+
+        @html = @html + "<td>#{crawl_page.url}</td>"
+        @html = @html + "</tr>"
       end
-
-      if result.nil?
-        @html = @html + "<td>OK</td>"
-      else
-        @html = @html + "<td>NOT OK found '" + result.to_s  + "'</td>"
-      end
-
-      @html = @html + "<td>#{crawl_page.url}</td>"
-      @html = @html + "</tr>"
-
     end
   end
 
