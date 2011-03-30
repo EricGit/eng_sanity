@@ -7,7 +7,7 @@ get '/' do
 end
 
 post '/submit' do
-  @common_english_words = ['the','of','to','and','a','in','is','it','you','that','he','was','for','on','are','with','as','I','his','they','be','at','one','have','this','from','or','had','by','hot','but','some','what','there','we','can','out','other','were','all','your','when','up','use','word','how','said','an','each','she']
+  @common_english_words = params[:words].split(/,/)
 
   @submitvalue = params[:site]
 
@@ -15,9 +15,10 @@ post '/submit' do
 
   @start = Integer(params[:start])
   @end   = Integer(params[:end])
+  @depth = Integer(params[:depth])
   count = 1
 
-  Anemone.crawl(@submitvalue) do |anemone|
+  Anemone.crawl(@submitvalue, :depth_limit => @depth) do |anemone|
     anemone.on_every_page do |crawl_page|
       puts "crawl_page: #{crawl_page.url}"
       if (count <= @end && count >= @start)
@@ -39,7 +40,7 @@ post '/submit' do
         if result.nil?
           @html = @html + "<td>OK</td>"
         else
-          @html = @html + "<td>NOT OK found '" + result.to_s  + "'</td>"
+          @html = @html + "<td>Found word:'" + result.to_s  + "'</td>"
         end
 
         @html = @html + "<td>#{crawl_page.url}</td>"

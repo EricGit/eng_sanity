@@ -1,7 +1,30 @@
 <p>Check for common english strings!</p>
+
 <form method="post" action="/submit">
-  Site:<input type="input" name ="site" value="http://fr.simplyaccounting.com/" size="40"><BR/>
-  Start:<input type="text" name ="start" value="1" size="10"><BR/>
-  End:<input type="text" name ="end" value="10" size="10"><BR/>
-  <input type="submit"/>
+  <table>
+    <tr>
+      <td>Site</td>
+      <td><input type="input" name ="site" value="http://fr.simplyaccounting.com/" size="40"/></td>
+    </tr>
+    <tr>
+      <td>Words</td>
+      <td><input type="input" name ="words" value="the,of,to,and,a,in,is,it,you,that,he,was,for,on,are,with,as,I,his,they,be,at,one,have,this,from,or,had,by,hot,but,some,what,there,we,can,out,other,were,all,your,when,up,use,word,how,said,an,each,she" size="150"/></td>
+    </tr>
+    <tr>
+      <td>Start Page</td>
+      <td><input type="input" name ="start" value="1" size="10"/></td>
+    </tr>
+    <tr>
+      <td>End Page</td>
+      <td><input type="input" name ="end" value="10000" size="10"/></td>
+    </tr>
+    <tr>
+      <td>Depth of Search</td>
+      <td><input type="input" name ="depth" value="1" size="10"/></td>
+    </tr>
+    <tr>
+      <td><input type="submit"/></td>
+      <td></td>
+    </tr>
+  </table>
 </form>
