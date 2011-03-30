@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require 'anemone'
+#require 'anemone'
 
 get '/' do
   erb :index
