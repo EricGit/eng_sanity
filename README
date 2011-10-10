@@ -1,0 +1,15 @@
+== English Word Sanitizer
+
+Simple Sinatra application for crawling a website looking for the 50 most common words (can be changed in the UI)
+
+== Getting Started
+
+1. Run the following command:
+  - ruby hello.rb
+  - navigate to http://localhost:4567/
+
+2. Explanation:
+  - Depth - is how many levels to crawl the site.  Default is 1 (only one link level)
+  - Start/End page - just in case there are more than 10000 total links (yikes!)
+  - Words - 50 most commmon words to look for (as defined by some site that I found in google)
+  - Site - the non-English site you want to crawl looking for English words

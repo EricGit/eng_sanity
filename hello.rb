@@ -2,10 +2,12 @@ require 'rubygems'
 require 'sinatra'
 require 'anemone'
 
+#show search form
 get '/' do
   erb :index
 end
 
+#on submit get Anemone to crawl site looking for english words
 post '/submit' do
   @common_english_words = params[:words].split(/,/)
 
